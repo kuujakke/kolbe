@@ -2,7 +2,7 @@
 *Jakke Kuukkanen - syksy 2017*
 
  - [Sovellus](http://ecs-first-run-alb-2105280952.eu-central-1.elb.amazonaws.com/)
- - [Dokumentointi](https://github.com/kuujakke/kolbe/blob/master/doc/doc.pdf)
+ - [Dokumentointi](https://github.com/kuujakke/kolbe/blob/master/doc/dokumentaatio.pdf)
 
 ## Aihemäärittely
 Blogi/Wikisovellus, jossa mahdollista luoda, muokata ja poistaa sivuja, kommentoida sivuja sekä asettaa sivuille aihetunnisteita.

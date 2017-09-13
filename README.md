@@ -1,7 +1,7 @@
 # Tietokantasovellus -harjoitustyö (TSOHA)
 *Jakke Kuukkanen - syksy 2017*
 
- - [Sovellus](http://ecs-first-run-alb-2105280952.eu-central-1.elb.amazonaws.com/)
+ - [Sovellus](http://kolbe.eu-central-1.elasticbeanstalk.com/)
  - [Dokumentointi](https://github.com/kuujakke/kolbe/blob/master/doc/dokumentaatio.pdf)
 
 ## Aihemäärittely

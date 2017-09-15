@@ -1,2 +1,4 @@
-Flask==0.12.0
-Jinja2==2.8.1
+flask_markdown2
+Flask
+Jinja2
+markdown

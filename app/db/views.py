@@ -1,10 +1,11 @@
-from env import environment
+from flask import render_template
+
+from . import db
+
 import psycopg2
-
-
 def execute(command):
 
-    env = environment.DATABASES['default']
+    env = env.DATABASES['default']
 
     try:
         conn = psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (
@@ -29,11 +30,24 @@ def execute(command):
 
     return rows
 
-def overview():
+
+@db.route('/')
+def index():
     users = execute("""SELECT * FROM "users";""")
     pages = execute("""SELECT * FROM "pages";""")
     comments = execute("""SELECT * FROM "comments";""")
     tags = execute("""SELECT * FROM "tags";""")
 
     print(users, pages, comments, tags)
-    return "%s %s %s %s" % (users, pages, comments, tags)
+    return render_template('db/index.html')
+
+def pages():
+    return execute("""SELECT * FROM "pages";""")
+
+
+def tags():
+    return execute("""SELECT * FROM "tags";""")
+
+
+def users():
+    return execute("""SELECT id, email FROM "users";""")

@@ -1,0 +1,16 @@
+{% block content %}
+    <table width="100%" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>User ID</td>
+                <td>Email</td>
+            </tr>
+        </thead>
+        {% for user_id, email in users %}
+            <tr>
+                <td>{{ user_id }}</td>
+                <td>{{ email }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -19,3 +19,23 @@ Kommentti tulkitaan markdown tekstinä.
 ### Aihetunnisteet
 Kirjautuneen käyttäjän on mahdollista asettaa sivuille aihetunnisteita.
 
+## Sivukartta
+
+ - [Kotisivu](http://kolbe.eu-central-1.elasticbeanstalk.com/)
+   - Uusimmat sivut
+   - Suosituimmat aihetunnisteet
+
+ - [Tietokanta](http://kolbe.eu-central-1.elasticbeanstalk.com/database)
+   - Listaa kaikki sivut
+   - Listaa kaikki aihetunnisteet
+   - Listaa kaikki käyttäjät
+
+ - [Sivut](http://kolbe.eu-central-1.elasticbeanstalk.com/pages)
+   - Listaus kaikista sivuista
+
+ - [Aihetunnisteet](http://kolbe.eu-central-1.elasticbeanstalk.com/tags)
+   - Listaus kaikista aihetunnisteista
+
+ - [Käyttäjät](http://kolbe.eu-central-1.elasticbeanstalk.com/users)
+   - Listaus kaikista käyttäjistä
+

@@ -1,6 +1,6 @@
 # Järjestelmän tietosisältö
 
-![käsitekaavio](käsitekaavio.png "Käsitekaavio")
+![käsitekaavio](kasitekaavio.png "Käsitekaavio")
 
 ## Tietokohteet
 

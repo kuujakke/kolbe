@@ -1,4 +1,6 @@
-flask_markdown2
 Flask
 Jinja2
-markdown
+Flask-Bootstrap
+Flask-Login
+flask-nav
+psycopg2

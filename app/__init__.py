@@ -37,6 +37,6 @@ def create_app(config_name):
     application.register_blueprint(pages_blueprint, url_prefix='/pages')
 
     from .database import database as database_blueprint
-    application.register_blueprint(database_blueprint)
+    application.register_blueprint(database_blueprint, url_prefix='/database')
 
     return application

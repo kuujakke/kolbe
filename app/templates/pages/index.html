@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h1>Pages</h1>
+   <h1>Pages</h1>
     <table width="100%" class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -14,58 +14,6 @@
             <tr>
                 <td>{{ page_id }}</td>
                 <td>{{ user_id }}</td>
-                <td>{{ content }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-
-    <h1>Users</h1>
-    <table width="100%" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <td>User ID</td>
-                <td>Email</td>
-                <td>Password</td>
-            </tr>
-        </thead>
-        {% for email, user_id, password in users %}
-            <tr>
-                <td>{{ user_id }}</td>
-                <td>{{ email }}</td>
-                <td>{{ password }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-
-    <h1>Comments</h1>
-    <table width="100%" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <td>Page ID</td>
-                <td>User ID</td>
-                <td>Content</td>
-            </tr>
-        </thead>
-        {% for page_id, user_id, content in pages %}
-            <tr>
-                <td>{{ page_id }}</td>
-                <td>{{ user_id }}</td>
-                <td>{{ content }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-
-    <h1>Tags</h1>
-    <table width="100%" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <td>Page ID</td>
-                <td>Content</td>
-            </tr>
-        </thead>
-        {% for user_id, content in pages %}
-            <tr>
-                <td>{{ page_id }}</td>
                 <td>{{ content }}</td>
             </tr>
         {% endfor %}

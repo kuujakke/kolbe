@@ -1,6 +1,6 @@
-Flask
-Jinja2
-Flask-Bootstrap
-Flask-Nav
-Flask-Login
-psycopg2
+Flask==0.12.2
+Jinja2==2.9.6
+Flask-Bootstrap==3.3.7.1
+flask-nav==0.6
+Flask-Login==0.4.0
+psycopg2==2.7.3.1

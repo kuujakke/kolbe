@@ -28,6 +28,6 @@ def index():
 #    return header() + render_template('users.html', users=env.users())
 
 
-#def db():
+#def database():
 #    return header() + render_template('database.html', pages=env.pages())
 

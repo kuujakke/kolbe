@@ -18,15 +18,17 @@ def navbar():
         View('Pages', 'pages.index'),
         #View('Tags', 'tags'),
         #View('Users', 'users'),
-        View('Database', 'db'),
+        View('Database', 'database.index'),
     )
 
 def create_app(config_name):
     application = Flask(__name__)
     application.config.from_object(app_config[config_name])
     application.config.from_pyfile('../config.py')
+
     Bootstrap(application)
     nav.init_app(application)
+
     login_manager.init_app(application)
     login_manager.login_message = "Login to access this page"
     login_manager.login_view = "auth.login"
@@ -34,6 +36,7 @@ def create_app(config_name):
     from .pages import pages as pages_blueprint
     application.register_blueprint(pages_blueprint, url_prefix='/pages')
 
-    from .db import db as db_blueprint
-    application.register_blueprint(db_blueprint, url_prefix='/database')
+    from .database import database as database_blueprint
+    application.register_blueprint(database_blueprint)
+
     return application

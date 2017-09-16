@@ -1,11 +1,12 @@
-from flask import render_template
-
-from . import db
+from flask import current_app as app, render_template
+from . import database
 
 import psycopg2
+
+
 def execute(command):
 
-    env = env.DATABASES['default']
+    env = app.config['DATABASES']['default']
 
     try:
         conn = psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (
@@ -13,10 +14,10 @@ def execute(command):
             env['USER'],
             env['HOST'],
             env['PASSWORD']))
+        cur = conn.cursor()
     except:
         print("Unable to connect to the database")
 
-    cur = conn.cursor()
 
     try:
         cur.execute(command)
@@ -31,7 +32,7 @@ def execute(command):
     return rows
 
 
-@db.route('/')
+@database.route('/')
 def index():
     users = execute("""SELECT * FROM "users";""")
     pages = execute("""SELECT * FROM "pages";""")
@@ -39,15 +40,15 @@ def index():
     tags = execute("""SELECT * FROM "tags";""")
 
     print(users, pages, comments, tags)
-    return render_template('db/index.html')
+    return render_template('database/index.html', title="Database")
 
-def pages():
-    return execute("""SELECT * FROM "pages";""")
-
-
-def tags():
-    return execute("""SELECT * FROM "tags";""")
+#def pages():
+#    return execute("""SELECT * FROM "pages";""")
 
 
-def users():
-    return execute("""SELECT id, email FROM "users";""")
+#def tags():
+#    return execute("""SELECT * FROM "tags";""")
+
+
+#def users():
+#    return execute("""SELECT id, email FROM "users";""")

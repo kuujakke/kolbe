@@ -40,7 +40,12 @@ def index():
     tags = execute("""SELECT * FROM "tags";""")
 
     print(users, pages, comments, tags)
-    return render_template('database/index.html', title="Database")
+    return render_template('database/index.html',
+                           title="Database",
+                           users=users,
+                           pages=pages,
+                           comments=comments,
+                           tags=tags)
 
 #def pages():
 #    return execute("""SELECT * FROM "pages";""")

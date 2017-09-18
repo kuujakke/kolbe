@@ -10,7 +10,7 @@
                 <td>Content</td>
             </tr>
         </thead>
-        {% for page_id, user_id, content in pages %}
+        {% for id, user_id, page_id, content in pages %}
             <tr>
                 <td>{{ page_id }}</td>
                 <td>{{ user_id }}</td>
@@ -28,7 +28,7 @@
                 <td>Password</td>
             </tr>
         </thead>
-        {% for email, user_id, password in users %}
+        {% for user_id, email, password in users %}
             <tr>
                 <td>{{ user_id }}</td>
                 <td>{{ email }}</td>
@@ -46,7 +46,7 @@
                 <td>Content</td>
             </tr>
         </thead>
-        {% for page_id, user_id, content in pages %}
+        {% for id, user_id, page_id, content in pages %}
             <tr>
                 <td>{{ page_id }}</td>
                 <td>{{ user_id }}</td>
@@ -63,7 +63,7 @@
                 <td>Content</td>
             </tr>
         </thead>
-        {% for user_id, content in tags %}
+        {% for id, page_id, content in tags %}
             <tr>
                 <td>{{ page_id }}</td>
                 <td>{{ content }}</td>

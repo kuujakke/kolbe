@@ -4,10 +4,10 @@ FILES=""
 
 cd ../doc
 
-while read file; do
-  if [ -f $file ]; then
-      FILES=$(echo $FILES $file)
+while read FILE; do
+  if [ -f ${FILE} ]; then
+      FILES="${FILES} ${FILE}"
   fi
 done <sisallysluettelo.txt
 
-pandoc $FILES -o dokumentaatio.pdf 
+pandoc ${FILES} -o dokumentaatio.pdf

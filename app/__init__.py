@@ -14,7 +14,7 @@ nav = Nav()
 def navbar():
     return Navbar(
         'kolbe',
-        #View('Home', 'index'),
+        View('Dashboard', 'dashboard.index'),
         View('Pages', 'pages.index'),
         #View('Tags', 'tags'),
         #View('Users', 'users'),
@@ -38,5 +38,8 @@ def create_app(config_name):
 
     from .database import database as database_blueprint
     application.register_blueprint(database_blueprint, url_prefix='/database')
+
+    from .dashboard import dashboard as dashboard_blueprint
+    application.register_blueprint(dashboard_blueprint, url_prefix='/')
 
     return application

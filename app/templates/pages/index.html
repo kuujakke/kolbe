@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
+    <p>
+        <a href="new" class="btn btn-success">New page</a>
+    </p>
+
    <h1>Pages</h1>
     <table width="100%" class="table table-bordered table-striped">
         <thead>
@@ -8,6 +12,7 @@
                 <td>Page ID</td>
                 <td>User ID</td>
                 <td>Content</td>
+                <td></td>
             </tr>
         </thead>
         {% for page in pages %}
@@ -15,6 +20,7 @@
                 <td>{{ page.id }}</td>
                 <td>{{ page.user_id }}</td>
                 <td>{{ page.content }}</td>
+                <td><a href="{{ page.id }}/edit" class="btn btn-success">Edit</a></td>
             </tr>
         {% endfor %}
     </table>

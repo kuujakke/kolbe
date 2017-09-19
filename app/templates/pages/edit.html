@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <form method="POST">
+        {{ form.csrf_token }}
+        {{ form.user_id }}
+        <div class="form-group">
+            {{ form.content(rows='25', cols='20', class='form-control') }}
+        </div>
+        <input type="submit" value="Edit" class="btn btn-warning">
+    </form>
+    <a href="/pages" class="btn btn-danger">Cancel</a>
+{% endblock %}

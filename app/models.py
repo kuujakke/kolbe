@@ -2,20 +2,22 @@ import psycopg2
 from flask import current_app as app
 
 
-def execute(command):
-
+def connect():
     env = app.config['DATABASES']['default']
 
     try:
-        conn = psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (
+        return psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (
             env['NAME'],
             env['USER'],
             env['HOST'],
             env['PASSWORD']))
-        cur = conn.cursor()
     except:
         print("Unable to connect to the database")
 
+
+def execute(command):
+    conn = connect()
+    cur = conn.cursor()
 
     try:
         cur.execute(command)
@@ -104,6 +106,15 @@ def get_user_by_id(id):
         user = User(rows[0])
 
 
+def save_page_content(page):
+    sql = """UPDATE "pages" SET "content" = '{0}' WHERE "id" = {1};"""
+    conn = connect()
+    cur = conn.cursor()
+    cur.execute(sql.format(page.content, page.id))
+    conn.commit()
+    cur.close()
+    conn.close()
+
 class Page:
     def __init__(self, row):
         self.id = row[0]
@@ -131,3 +142,4 @@ class User:
         self.id = row[0]
         self.email = row[1]
         self.password = row[2]
+

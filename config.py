@@ -16,6 +16,7 @@ class Config(object):
                 'PORT': os.environ['RDS_PORT'],
             }
         }
+    SECRET_KEY = os.environ['SECRET_KEY']
 
 
 class DevelopmentConfig(Config):

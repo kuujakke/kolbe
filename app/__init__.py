@@ -3,10 +3,12 @@ from flask_bootstrap import Bootstrap
 from flask_nav import Nav
 from flask_nav.elements import Navbar, View
 from flask_login import LoginManager
+from flask_wtf.csrf import CsrfProtect
 
 from config import app_config
 
 login_manager = LoginManager()
+csrf = CsrfProtect()
 
 nav = Nav()
 
@@ -28,10 +30,13 @@ def create_app(config_name):
 
     Bootstrap(application)
     nav.init_app(application)
+    csrf.init_app(application)
 
     login_manager.init_app(application)
     login_manager.login_message = "Login to access this page"
     login_manager.login_view = "auth.login"
+
+
 
     from .pages import pages as pages_blueprint
     application.register_blueprint(pages_blueprint, url_prefix='/pages')

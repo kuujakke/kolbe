@@ -7,4 +7,4 @@ def index():
 
     return render_template('pages/index.html',
                            title="Pages",
-                           pages=models.get_pages())
+                           pages=models.get_all_pages())

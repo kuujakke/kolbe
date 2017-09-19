@@ -10,11 +10,11 @@
                 <td>Content</td>
             </tr>
         </thead>
-        {% for page_id, user_id, content in pages %}
+        {% for page in pages %}
             <tr>
-                <td>{{ page_id }}</td>
-                <td>{{ user_id }}</td>
-                <td>{{ content }}</td>
+                <td>{{ page.id }}</td>
+                <td>{{ page.user_id }}</td>
+                <td>{{ page.content }}</td>
             </tr>
         {% endfor %}
     </table>

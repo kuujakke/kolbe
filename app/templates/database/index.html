@@ -10,11 +10,11 @@
                 <td>Content</td>
             </tr>
         </thead>
-        {% for page_id, user_id, content in pages %}
+        {% for page in pages %}
             <tr>
-                <td>{{ page_id }}</td>
-                <td>{{ user_id }}</td>
-                <td>{{ content }}</td>
+                <td>{{ page.id }}</td>
+                <td>{{ page.user_id }}</td>
+                <td>{{ page.content }}</td>
             </tr>
         {% endfor %}
     </table>
@@ -28,11 +28,11 @@
                 <td>Password</td>
             </tr>
         </thead>
-        {% for user_id, email, password in users %}
+        {% for user in users %}
             <tr>
-                <td>{{ user_id }}</td>
-                <td>{{ email }}</td>
-                <td>{{ password }}</td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.password }}</td>
             </tr>
         {% endfor %}
     </table>
@@ -41,16 +41,18 @@
     <table width="100%" class="table table-bordered table-striped">
         <thead>
             <tr>
+                <td>Comment ID</td>
                 <td>Page ID</td>
                 <td>User ID</td>
                 <td>Content</td>
             </tr>
         </thead>
-        {% for id, user_id, page_id, content in comments %}
+        {% for comment in comments %}
             <tr>
-                <td>{{ page_id }}</td>
-                <td>{{ user_id }}</td>
-                <td>{{ content }}</td>
+                <td>{{ comment.id }}</td>
+                <td>{{ comment.page_id }}</td>
+                <td>{{ comment.user_id }}</td>
+                <td>{{ comment.content }}</td>
             </tr>
         {% endfor %}
     </table>
@@ -59,14 +61,16 @@
     <table width="100%" class="table table-bordered table-striped">
         <thead>
             <tr>
+                <td>Tag ID</td>
                 <td>Page ID</td>
                 <td>Content</td>
             </tr>
         </thead>
-        {% for id, page_id, content in tags %}
+        {% for tag in tags %}
             <tr>
-                <td>{{ page_id }}</td>
-                <td>{{ content }}</td>
+                <td>{{ tag.id }}</td>
+                <td>{{ tag.page_id }}</td>
+                <td>{{ tag.content }}</td>
             </tr>
         {% endfor %}
     </table>

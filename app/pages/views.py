@@ -17,7 +17,7 @@ def index():
 
 @pages.route('/new', methods=["POST", "GET"])
 def new():
-    page = models.Page
+    page = models.Page(('', 1, ''))
     form = NewForm(secret_key=app.config['SECRET_KEY'], obj=page)
     if form.validate_on_submit():
         form.populate_obj(page)

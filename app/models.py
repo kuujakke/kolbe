@@ -11,20 +11,28 @@ def connect():
             env['USER'],
             env['HOST'],
             env['PASSWORD']))
-    except:
+    except ConnectionError:
         print("Unable to connect to the database")
 
 
-def execute(command):
+def execute(command, *variables):
     conn = connect()
     cur = conn.cursor()
 
     try:
-        cur.execute(command)
-    except:
+        if variables:
+            cur.execute(command.format(*variables))
+        else:
+            cur.execute(command)
+    except SyntaxError:
         print("SQL command failed to execute")
 
-    rows = cur.fetchall()
+    rows = ''
+
+    if "SELECT" in cur.query.decode():
+        rows = cur.fetchall()
+
+    conn.commit()
 
     cur.close()
     conn.close()
@@ -72,48 +80,73 @@ def get_all_tags():
     return tags
 
 
-def get_page_by_id(id):
-    sql = """SELECT "id", "user_id", "content" FROM "pages" WHERE "id" = {0};"""
-    rows = execute(sql.format(id))
+def new_page(page):
+    sql = """INSERT INTO pages ("user_id", "content") VALUES ('{0}', '{1}');"""
+    execute(sql, page.user_id, page.content)
+
+
+def new_comment(comment):
+    sql = """INSERT INTO comments ("user_id", "page_id", "content") VALUES ('{0}', '{1}', '{2}');"""
+    execute(sql, comment.user_id, comment.page_id, comment.content)
+
+
+def new_tag(tag):
+    sql = """INSERT INTO tags ("page_id", "content") VALUES ('{0}', '{1}');"""
+    execute(sql, tag.page_id, tag.content)
+
+
+def new_user(user):
+    sql = """INSERT INTO users ("email", "password") VALUES ('{0}', '{1}');"""
+    execute(sql, user.user_id, user.password)
+
+
+def get_page(page):
+    sql = """SELECT "id", "user_id", "content" FROM "pages" WHERE "id" = '{0}';"""
+    rows = execute(sql, page.id)
     if rows:
-        page = Page(rows[0])
-
-    return page
+        return Page(rows[0])
 
 
-def get_comment_by_id(id):
-    sql = """SELECT "id", "user_id", "page_id", "content" FROM "comments" WHERE "id" = {0};"""
-    rows = execute(sql.format(id))
+def get_comment(comment):
+    sql = """SELECT "id", "user_id", "page_id", "content" FROM "comments" WHERE "id" = '{0}';"""
+    rows = execute(sql, comment.id)
     if rows:
-        comment = Comment(rows[0])
-
-    return comment
+        return Comment(rows[0])
 
 
-def get_tag_by_id(id):
-    sql = """SELECT "id", "page_id", "content" FROM "tags" WHERE "id" = {0};"""
-    rows = execute(sql.format(id))
+def get_tag(tag):
+    sql = """SELECT "id", "page_id", "content" FROM "tags" WHERE "id" = '{0}';"""
+    rows = execute(sql, tag.id)
     if rows:
-        tag = Tag(rows[0])
-
-    return tag
+        return Tag(rows[0])
 
 
-def get_user_by_id(id):
-    sql = """SELECT "id", "email", "password" FROM "users" WHERE "id" = {0};"""
-    rows = execute(sql.format(id))
+def get_user(user):
+    sql = """SELECT "id", "email", "password" FROM "users" WHERE "id" = '{0}';"""
+    rows = execute(sql, user.id)
     if rows:
-        user = User(rows[0])
+        return User(rows[0])
 
 
-def save_page_content(page):
-    sql = """UPDATE "pages" SET "content" = '{0}' WHERE "id" = {1};"""
-    conn = connect()
-    cur = conn.cursor()
-    cur.execute(sql.format(page.content, page.id))
-    conn.commit()
-    cur.close()
-    conn.close()
+def save_page(page):
+    sql = """UPDATE pages SET "user_id" = '{0}', "content" = '{1}' WHERE "id" = '{2}';"""
+    execute(sql, page.user_id, page.content, page.id)
+
+
+def save_comment(comment):
+    sql = """UPDATE comments SET "user_id" = '{0}', "content" = '{1}' WHERE "id" = '{2}';"""
+    execute(sql, comment.user_id, comment.content, comment.id)
+
+
+def save_tag(tag):
+    sql = """UPDATE tags SET "page_id" = '{0}', "content" = '{1}' WHERE "id" = '{2}';"""
+    execute(sql, tag.user_id, tag.content, tag.id)
+
+
+def save_user(user):
+    sql = """UPDATE users SET "email" = '{0}', "password" = '{1}' WHERE "id" = '{2}';"""
+    execute(sql, user.user_id, user.content, user.id)
+
 
 class Page:
     def __init__(self, row):

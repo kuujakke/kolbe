@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    {{ content }}
+    <div class="btn-group">
+        <a href="/pages" class="btn btn-danger">Back</a>
+        <a href="/pages/{{ page_id }}/edit" class="btn btn-warning">Edit</a>
+    </div>
+{% endblock %}

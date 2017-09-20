@@ -18,7 +18,11 @@
                 <td>{{ page.id }}</td>
                 <td>{{ page.user_id }}</td>
                 <td>{{ page.content }}</td>
-                <td><a href="{{ page.id }}/edit" class="btn btn-warning">Edit</a></td>
+                <td class="btn btn-group">
+                    <a href="{{ page.id }}" class="btn btn-primary">Show</a>
+                    <a href="{{ page.id }}/edit" class="btn btn-warning">Edit</a>
+                    <a href="{{ page.id }}/delete" class="btn btn-danger">Delete</a>
+                </td>
             </tr>
         {% endfor %}
     </table>

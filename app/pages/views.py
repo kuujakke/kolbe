@@ -1,9 +1,11 @@
-from flask import current_app as app, render_template, redirect
+from flask import current_app as app, render_template, redirect, Markup
 from . import pages
 from app import models
 from flask_wtf import Form
-from wtforms import HiddenField, TextAreaField
+from wtforms import HiddenField
 from wtforms.validators import DataRequired
+from flask_pagedown.fields import PageDownField
+import markdown
 
 
 @pages.route('/')
@@ -13,20 +15,37 @@ def index():
                            pages=models.get_all_pages())
 
 
-@pages.route('/new')
+@pages.route('/new', methods=["POST", "GET"])
 def new():
+    page = models.Page
+    form = NewForm(secret_key=app.config['SECRET_KEY'], obj=page)
+    if form.validate_on_submit():
+        form.populate_obj(page)
+        models.new_page(page)
+        return redirect('/pages')
     return render_template('pages/new.html',
-                           title="New Page")
+                           title="New Page",
+                           form=form)
 
 
-@pages.route('/<id>/edit', methods=["POST", "GET"])
-def edit(id):
-    page = models.get_page_by_id(id)
+@pages.route('/<page_id>')
+def show(page_id):
+    page = models.get_page(models.Page((page_id, '', '')))
+    content = Markup(markdown.markdown(page.content))
+    return render_template('pages/show.html',
+                           title="Show Page",
+                           content=content,
+                           page_id=page_id)
+
+
+@pages.route('/<page_id>/edit', methods=["POST", "GET"])
+def edit(page_id):
+    page = models.get_page(models.Page((page_id, '', '')))
     form = EditForm(secret_key=app.config['SECRET_KEY'], obj=page)
     if form.validate_on_submit():
         form.populate_obj(page)
-        models.save_page_content(page)
-        return redirect('/pages')
+        models.save_page(page)
+        return redirect('/pages/%s' % page_id)
     return render_template('pages/edit.html',
                            title="Edit Page",
                            form=form)
@@ -34,7 +53,9 @@ def edit(id):
 
 class EditForm(Form):
     user_id = HiddenField('user_id', validators=[DataRequired()])
-    content = TextAreaField('content', validators=[DataRequired()])
+    content = PageDownField('content', validators=[DataRequired()])
 
 
-
+class NewForm(EditForm):
+    user_id = HiddenField('user_id', validators=[DataRequired()])
+    content = PageDownField('content', validators=[DataRequired()])

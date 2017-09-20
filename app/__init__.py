@@ -4,6 +4,7 @@ from flask_nav import Nav
 from flask_nav.elements import Navbar, View
 from flask_login import LoginManager
 from flask_wtf.csrf import CsrfProtect
+from flask_pagedown import PageDown
 
 from config import app_config
 
@@ -31,6 +32,7 @@ def create_app(config_name):
     Bootstrap(application)
     nav.init_app(application)
     csrf.init_app(application)
+    pagedown = PageDown(application)
 
     login_manager.init_app(application)
     login_manager.login_message = "Login to access this page"

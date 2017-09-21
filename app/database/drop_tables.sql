@@ -1,1 +1,1 @@
-DROP TABLE "users", "pages", "comments", "tags";
+DROP TABLE "users", "pages", "comments", "tags" CASCADE;

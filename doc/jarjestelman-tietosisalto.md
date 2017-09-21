@@ -1,7 +1,9 @@
 \newpage
+
 # Järjestelmän tietosisältö
 
 ![käsitekaavio](kasitekaavio.png "Käsitekaavio")
+
 
 ## Tietokohteet
 

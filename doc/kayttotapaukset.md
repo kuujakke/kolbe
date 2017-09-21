@@ -30,3 +30,6 @@ Käyttäjä ei saa muokata toisten käyttäjien jättämiä kommentteja.
 
 #### Lisää ja poistaa aihetunnisteita
 Kirjautuneena käyttäjä voi lisätä ja poistaa aihetunnisteita.
+
+#### Muut käyttötapaukset
+Muita käyttötapauksia ovat mm. kirjautuminen ja rekisteröityminen.

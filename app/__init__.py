@@ -38,8 +38,6 @@ def create_app(config_name):
     login_manager.login_message = "Login to access this page"
     login_manager.login_view = "auth.login"
 
-
-
     from .pages import pages as pages_blueprint
     application.register_blueprint(pages_blueprint, url_prefix='/pages')
 

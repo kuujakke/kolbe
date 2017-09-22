@@ -14,7 +14,7 @@
             <tr>
                 <td>{{ page.id }}</td>
                 <td>{{ page.user_id }}</td>
-                <td>{{ page.content }}</td>
+                <td>{{ page.content[0:50] }}</td>
             </tr>
         {% endfor %}
     </table>

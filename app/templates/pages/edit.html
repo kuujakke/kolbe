@@ -4,16 +4,24 @@
     {{ pagedown.include_pagedown() }}
 {% endblock %}
 {% block content %}
-    <form method="POST">
-        {{ form.csrf_token }}
-        {{ form.user_id }}
-
-        <div class="form-group">
-            {{ form.content(rows='10', cols='10', class='form-control') }}
-        </div>
-        <div class="btn-group">
-            <a href="/pages" class="btn btn-danger">Cancel</a>
-            <input type="submit" value="Commit" class="btn btn-warning">
-        </div>
-    </form>
+    <div class="container-fluid">
+        <form method="POST">
+            {{ form.csrf_token }}
+            {{ form.user_id }}
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    {{ form.content(rows='10', cols='10', class='form-control', only_input=True) }}
+                </div>
+                <div class="form-group col-lg-6 well">
+                    {{ form.content(rows='10', cols='10', only_preview=True) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="btn-group col-lg-6 col-lg-offset-5">
+                    <a href="/pages" class="btn btn-danger">Cancel</a>
+                    <input type="submit" value="Commit" class="btn btn-warning">
+                </div>
+            </div>
+        </form>
+    </div>
 {% endblock %}

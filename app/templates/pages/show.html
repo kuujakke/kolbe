@@ -7,9 +7,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="btn-group col-lg-12 col-lg-offset-3">
-                <a href="/pages" class="btn btn-danger col-lg-3">Back</a>
-                <a href="/pages/{{ page_id }}/edit" class="btn btn-warning col-lg-3">Edit</a>
+            <div class="btn-group col-lg-8 col-lg-offset-2">
+                <form action="/pages/{{ page_id }}/delete" method="post">
+                    {{ form.csrf_token }}
+                    <a href="/pages" class="btn btn-primary col-lg-4">Back</a>
+                    <a href="/pages/{{ page_id }}/edit" class="btn btn-warning col-lg-4">Edit</a>
+                    <input type="submit" value="Delete" class="btn btn-danger col-lg-4"/>
+                </form>
             </div>
         </div>
     </div>

@@ -36,7 +36,8 @@ def show(page_id):
     return render_template('pages/show.html',
                            title="Show Page",
                            content=content,
-                           page_id=page_id)
+                           page_id=page_id,
+                           form=Form(secret_key=app.config['SECRET_KEY']))
 
 
 @pages.route('/<page_id>/edit', methods=["POST", "GET"])
@@ -50,6 +51,11 @@ def edit(page_id):
     return render_template('pages/edit.html',
                            title="Edit Page",
                            form=form)
+
+@pages.route('/<page_id>/delete', methods=["POST"])
+def delete(page_id):
+    models.delete_page(page_id)
+    return redirect('/pages')
 
 
 class EditForm(Form):

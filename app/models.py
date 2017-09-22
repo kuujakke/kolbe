@@ -149,6 +149,11 @@ def save_user(user):
     execute(sql, (user.user_id, user.content, user.id))
 
 
+def delete_page(page_id):
+    sql = """DELETE FROM pages WHERE "id" = %s;"""
+    execute(sql, (page_id,))
+
+
 class Page:
     def __init__(self, row):
         self.id = row[0]

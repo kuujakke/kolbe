@@ -15,13 +15,14 @@ def connect():
         print("Unable to connect to the database")
 
 
-def execute(command, *variables):
+def execute(command, variables=None):
     conn = connect()
     cur = conn.cursor()
 
     try:
         if variables:
-            cur.execute(command.format(*variables))
+            sql = cur.mogrify(command, variables)
+            cur.execute(sql)
         else:
             cur.execute(command)
     except SyntaxError:
@@ -81,71 +82,71 @@ def get_all_tags():
 
 
 def new_page(page):
-    sql = """INSERT INTO pages ("user_id", "content") VALUES ('{0}', '{1}');"""
-    execute(sql, page.user_id, page.content)
+    sql = """INSERT INTO pages ("user_id", "content") VALUES (%s, %s);"""
+    execute(sql, (page.user_id, page.content))
 
 
 def new_comment(comment):
-    sql = """INSERT INTO comments ("user_id", "page_id", "content") VALUES ('{0}', '{1}', '{2}');"""
-    execute(sql, comment.user_id, comment.page_id, comment.content)
+    sql = """INSERT INTO comments ("user_id", "page_id", "content") VALUES (%s, %s, %s);"""
+    execute(sql, (comment.user_id, comment.page_id, comment.content))
 
 
 def new_tag(tag):
-    sql = """INSERT INTO tags ("page_id", "content") VALUES ('{0}', '{1}');"""
-    execute(sql, tag.page_id, tag.content)
+    sql = """INSERT INTO tags ("page_id", "content") VALUES (%s, %s);"""
+    execute(sql, (tag.page_id, tag.content))
 
 
 def new_user(user):
-    sql = """INSERT INTO users ("email", "password") VALUES ('{0}', '{1}');"""
-    execute(sql, user.user_id, user.password)
+    sql = """INSERT INTO users ("email", "password") VALUES (%s, %s);"""
+    execute(sql, (user.user_id, user.password))
 
 
 def get_page(page):
-    sql = """SELECT "id", "user_id", "content" FROM "pages" WHERE "id" = '{0}';"""
-    rows = execute(sql, page.id)
+    sql = """SELECT "id", "user_id", "content" FROM "pages" WHERE "id" = %s;"""
+    rows = execute(sql, (page.id,))
     if rows:
         return Page(rows[0])
 
 
 def get_comment(comment):
-    sql = """SELECT "id", "user_id", "page_id", "content" FROM "comments" WHERE "id" = '{0}';"""
-    rows = execute(sql, comment.id)
+    sql = """SELECT "id", "user_id", "page_id", "content" FROM "comments" WHERE "id" = %s;"""
+    rows = execute(sql, (comment.id,))
     if rows:
         return Comment(rows[0])
 
 
 def get_tag(tag):
-    sql = """SELECT "id", "page_id", "content" FROM "tags" WHERE "id" = '{0}';"""
-    rows = execute(sql, tag.id)
+    sql = """SELECT "id", "page_id", "content" FROM "tags" WHERE "id" = %s;"""
+    rows = execute(sql, (tag.id,))
     if rows:
         return Tag(rows[0])
 
 
 def get_user(user):
-    sql = """SELECT "id", "email", "password" FROM "users" WHERE "id" = '{0}';"""
-    rows = execute(sql, user.id)
+    sql = """SELECT "id", "email", "password" FROM "users" WHERE "id" = %s;"""
+    rows = execute(sql, (user.id,))
     if rows:
         return User(rows[0])
 
 
 def save_page(page):
-    sql = """UPDATE pages SET "user_id" = '{0}', "content" = '{1}' WHERE "id" = '{2}';"""
-    execute(sql, page.user_id, page.content, page.id)
+    sql = """UPDATE pages SET "user_id" = %s, "content" = %s WHERE "id" = %s""";
+    execute(sql, (page.user_id, page.content, page.id))
 
 
 def save_comment(comment):
-    sql = """UPDATE comments SET "user_id" = '{0}', "content" = '{1}' WHERE "id" = '{2}';"""
-    execute(sql, comment.user_id, comment.content, comment.id)
+    sql = """UPDATE comments SET "user_id" = %s, "content" = %s WHERE "id" = %s;"""
+    execute(sql, (comment.user_id, comment.content, comment.id))
 
 
 def save_tag(tag):
-    sql = """UPDATE tags SET "page_id" = '{0}', "content" = '{1}' WHERE "id" = '{2}';"""
-    execute(sql, tag.user_id, tag.content, tag.id)
+    sql = """UPDATE tags SET "page_id" = %s, "content" = %s WHERE "id" = %s;"""
+    execute(sql, (tag.user_id, tag.content, tag.id))
 
 
 def save_user(user):
-    sql = """UPDATE users SET "email" = '{0}', "password" = '{1}' WHERE "id" = '{2}';"""
-    execute(sql, user.user_id, user.content, user.id)
+    sql = """UPDATE users SET "email" = %s, "password" = %s WHERE "id" = %s;"""
+    execute(sql, (user.user_id, user.content, user.id))
 
 
 class Page:

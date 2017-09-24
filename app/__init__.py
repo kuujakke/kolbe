@@ -19,8 +19,8 @@ def navbar():
         'kolbe',
         View('Dashboard', 'dashboard.index'),
         View('Pages', 'pages.index'),
-        #View('Tags', 'tags'),
-        #View('Users', 'users'),
+        View('Tags', 'tags.index'),
+        View('Users', 'users.index'),
         View('Database', 'database.index'),
     )
 
@@ -41,10 +41,17 @@ def create_app(config_name):
     from .pages import pages as pages_blueprint
     application.register_blueprint(pages_blueprint, url_prefix='/pages')
 
+    from .users import users as users_blueprint
+    application.register_blueprint(users_blueprint, url_prefix='/users')
+
+    from .tags import tags as tags_blueprint
+    application.register_blueprint(tags_blueprint, url_prefix='/tags')
+
     from .database import database as database_blueprint
     application.register_blueprint(database_blueprint, url_prefix='/database')
 
     from .dashboard import dashboard as dashboard_blueprint
     application.register_blueprint(dashboard_blueprint, url_prefix='/')
+
 
     return application

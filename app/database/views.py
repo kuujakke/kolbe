@@ -10,7 +10,7 @@ from app.tags.models import Tag
 def index():
     return render_template('database/index.html',
                            title="Database",
-                           users=User.get_all_users(User()),
+                           users=User.all(User()),
                            pages=Page.get_all_pages(Page()),
                            comments=Comment.get_all_comments(Comment()),
                            tags=Tag.get_all_tags(Tag()))

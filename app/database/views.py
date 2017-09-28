@@ -1,4 +1,6 @@
 from flask import render_template
+from flask_login import login_required
+
 from . import database
 from app.pages.models import Page
 from app.users.models import User
@@ -6,6 +8,7 @@ from app.comments.models import Comment
 from app.tags.models import Tag
 
 
+@login_required
 @database.route('/')
 def index():
     return render_template('database/index.html',

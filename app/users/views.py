@@ -1,5 +1,5 @@
-from flask import flash, render_template
-from flask_login import login_user
+from flask import flash, render_template, redirect, current_app
+from flask_login import login_user, login_required, logout_user, current_user
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Length
 
@@ -8,6 +8,7 @@ from . import users
 from app.users.models import User
 
 
+@login_required
 @users.route('/')
 def index():
     return render_template('users/index.html',
@@ -18,23 +19,28 @@ def index():
 @users.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    error = None
     if form.validate_on_submit():
-        user = User.get_email(User(), form.email.data)
-        if user:
-            login_user(user)
-            flash('Logged in successfully.')
-        return form.redirect('/dashboard')
-    else:
+        user = User.verify(User(), form.email.data, form.password.data)
+        if user is not None:
+            if login_user(user):
+                current_app.logger.debug('%s has logged in', user.email)
+                flash('Logged in successfully.')
+                return form.redirect('/')
         flash('Wrong email or password.')
+        error = "Wrong email or password."
+    return render_template('users/login.html', form=form, error=error)
 
-    return render_template('users/login.html', form=form)
 
-
+@login_required
 @users.route('/logout')
 def logout():
-    pass
+    current_app.logger.debug('%s has logged out', current_user.email)
+    logout_user()
+    return redirect('/')
 
 
+@login_required
 @users.route('/profile')
 def profile():
     pass

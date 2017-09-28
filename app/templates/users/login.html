@@ -21,6 +21,13 @@
                     <input type="submit" value="Login" class="btn bg-primary">
                 </form>
             </div>
+            <div class="panel-footer">
+                {% if error %}
+                <div class="alert alert-danger">
+                    <p class=error><strong>Error:</strong> {{ error }}</p>
+                </div>
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}

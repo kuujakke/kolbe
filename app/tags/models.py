@@ -28,3 +28,7 @@ class Tag(DB):
     def save_tag(self, tag):
         sql = """UPDATE tags SET "page_id" = %s, "content" = %s WHERE "id" = %s;"""
         self.execute(sql, (tag.user_id, tag.content, tag.id))
+
+    def popular_tags(self, count):
+        # Tähän komento joka hakee 'count' verran suosituimpia aihetunnisteita
+        return self.get_all_tags()

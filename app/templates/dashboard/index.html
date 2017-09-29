@@ -1,1 +1,39 @@
 {% extends "base.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="panel panel-default col-md-6">
+                <div class="panel-heading">
+                    <h1>Recent pages</h1>
+                    <ul class="list-group">
+                    {% for page in pages %}
+                        <li class="list-group-item"><a href="/pages/{{ page.id }}">{{ page.content[0:50] }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="panel panel-default col-md-6">
+                <div class="panel-heading">
+                    <h1>Recent comments</h1>
+                    <ul class="list-group">
+                    {% for comment in comments %}
+                        <li class="list-group-item"><a href="/pages/{{ comment.page_id }}">{{ comment.content[0:50] }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default col-md-12">
+                <div class="panel-heading">
+                    <h1>Popular tags</h1>
+                    <ul class="list-group">
+                    {% for tag in tags %}
+                        <li class="list-group-item"><a href="/tags/{{ tag.id }}">{{ tag.content[0:50] }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

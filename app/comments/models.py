@@ -28,3 +28,7 @@ class Comment(DB):
     def save_comment(self, comment):
         sql = """UPDATE comments SET "user_id" = %s, "content" = %s WHERE "id" = %s;"""
         self.execute(sql, (comment.user_id, comment.content, comment.id))
+
+    def recent_comments(self, count):
+        # Tähän komento joka hakee 'count' verran viimeisimpiä kommentteja
+        return self.get_all_comments()

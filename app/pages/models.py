@@ -15,6 +15,10 @@ class Page(DB):
 
         return pages
 
+    def get_recent(self, count):
+        # Tähän haku joka hakee 'count' määrän verran viimeisimpiä sivuja
+        return self.get_all_pages()
+
     def new_page(self, data):
         sql = """INSERT INTO pages ("user_id", "content") VALUES (%s, %s);"""
         self.execute(sql, (data.user_id, data.content))

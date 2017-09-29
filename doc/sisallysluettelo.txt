@@ -2,3 +2,4 @@ johdanto.md
 kayttotapaukset.md
 jarjestelman-tietosisalto.md
 relaatiotietokantakaavio.md
+kaynnistys-ja-kayttoohje.md

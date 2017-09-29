@@ -1,9 +1,9 @@
 from flask import flash, render_template, redirect, current_app
 from flask_login import login_user, login_required, logout_user, current_user
+from flask_wtf import Form
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Length
 
-from app.users.redirectForm import RedirectForm
 from . import users
 from app.users.models import User
 
@@ -18,7 +18,7 @@ def index():
 
 @users.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
+    form = LoginForm(secret_key=current_app.config['SECRET_KEY'])
     error = None
     if form.validate_on_submit():
         user = User.verify(User(), form.email.data, form.password.data)
@@ -26,7 +26,7 @@ def login():
             if login_user(user):
                 current_app.logger.debug('%s has logged in', user.email)
                 flash('Logged in successfully.')
-                return form.redirect('/')
+                return redirect('/')
         flash('Wrong email or password.')
         error = "Wrong email or password."
     return render_template('users/login.html', form=form, error=error)
@@ -46,6 +46,6 @@ def profile():
     pass
 
 
-class LoginForm(RedirectForm):
+class LoginForm(Form):
     email = StringField('Email', validators=[DataRequired(), Length(6)])
     password = PasswordField('Password', validators=[DataRequired(), Length(8)])

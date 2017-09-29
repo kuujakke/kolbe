@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="panel panel-default col-md-4 col-md-offset-4">
+            <div class="panel-heading">
+                <h1>Login</h1>
+            </div>
+            <div class="panel-body">
+                <form method="POST">
+                    {{ form.csrf_token }}
+                    {{ form.user_id }}
+
+                    <div class="form-group">
+                        <label for="emailInput">Email:</label>
+                        {{ form.email(class='form-control', id='emailInput') }}
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordInput">Password:</label>
+                        {{ form.password(class='form-control', id='passwordInput') }}
+                    </div>
+                    <input type="submit" value="Login" class="btn bg-primary">
+                </form>
+            </div>
+            <div class="panel-footer">
+                {% if error %}
+                <div class="alert alert-danger">
+                    <p class=error><strong>Error:</strong> {{ error }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

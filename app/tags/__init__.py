@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-pages = Blueprint('pages', __name__)
+tags = Blueprint('tags', __name__)
 
 from . import views

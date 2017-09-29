@@ -1,6 +1,6 @@
 from flask import current_app as app, render_template, redirect, Markup
 from . import pages
-from app import models
+from app.pages.models import Page
 from flask_wtf import Form
 from wtforms import HiddenField
 from wtforms.validators import DataRequired
@@ -12,16 +12,17 @@ import markdown
 def index():
     return render_template('pages/index.html',
                            title="Pages",
-                           pages=models.get_all_pages())
+                           pages=Page.get_all_pages(Page()))
 
 
 @pages.route('/new', methods=["POST", "GET"])
 def new():
-    page = models.Page(('', 1, ''))
+    user_id = 1
+    page = Page(('', user_id, ''))
     form = NewForm(secret_key=app.config['SECRET_KEY'], obj=page)
     if form.validate_on_submit():
         form.populate_obj(page)
-        models.new_page(page)
+        Page.new_page(page)
         return redirect('/pages')
     return render_template('pages/new.html',
                            title="New Page",
@@ -30,25 +31,32 @@ def new():
 
 @pages.route('/<page_id>')
 def show(page_id):
-    page = models.get_page(models.Page((page_id, '', '')))
+    page = Page.get_page(Page(), page_id)
     content = Markup(markdown.markdown(page.content))
     return render_template('pages/show.html',
                            title="Show Page",
                            content=content,
-                           page_id=page_id)
+                           page_id=page_id,
+                           form=Form(secret_key=app.config['SECRET_KEY']))
 
 
 @pages.route('/<page_id>/edit', methods=["POST", "GET"])
 def edit(page_id):
-    page = models.get_page(models.Page((page_id, '', '')))
+    page = Page.get_page(Page(), page_id)
     form = EditForm(secret_key=app.config['SECRET_KEY'], obj=page)
     if form.validate_on_submit():
         form.populate_obj(page)
-        models.save_page(page)
+        page.save_page()
         return redirect('/pages/%s' % page_id)
     return render_template('pages/edit.html',
                            title="Edit Page",
                            form=form)
+
+
+@pages.route('/<page_id>/delete', methods=["POST"])
+def delete(page_id):
+    Page.delete_page(Page((page_id, '', '')))
+    return redirect('/pages')
 
 
 class EditForm(Form):

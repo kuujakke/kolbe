@@ -39,3 +39,10 @@ Kirjautuneen käyttäjän on mahdollista asettaa sivuille aihetunnisteita.
  - [Käyttäjät](http://kolbe.eu-central-1.elasticbeanstalk.com/users)
    - Listaus kaikista käyttäjistä
 
+
+## Testitunnukset
+
+
+Sähköpostiosoite | Salasana
+-----------------|----------
+testi@helsinki.fi | salaisuus

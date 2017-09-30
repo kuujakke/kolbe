@@ -4,10 +4,12 @@ RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
-RUN apk --update --no-cache add build-base linux-headers && pip install --no-cache-dir uwsgi && apk del build-base linux-headers
-
 COPY requirements.txt /usr/src/app/
-RUN pip install --no-cache-dir -r requirements.txt
+
+RUN apk --update --no-cache add build-base linux-headers postgresql-dev && \
+pip install --no-cache-dir uwsgi && \
+pip install --no-cache-dir -r requirements.txt\
+&& apk del build-base linux-headers
 
 COPY . /usr/src/app
 

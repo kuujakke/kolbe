@@ -16,5 +16,21 @@
                 </form>
             </div>
         </div>
+        {% for comment in comments %}
+            <div class="row">
+                <div class="well col-lg-8 col-lg-offset-2">
+                    <ul>
+                        <li class="list-group-item panel panel-default">
+                            <div class="panel-heading">
+                                {{ comment.user_id }}
+                            </div>
+                            <div class="panel-body">
+                                {{ comment.content }}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

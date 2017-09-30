@@ -8,8 +8,8 @@ from . import users
 from app.users.models import User
 
 
-@login_required
 @users.route('/')
+@login_required
 def index():
     return render_template('users/index.html',
                            title="Users",
@@ -32,16 +32,16 @@ def login():
     return render_template('users/login.html', form=form, error=error)
 
 
-@login_required
 @users.route('/logout')
+@login_required
 def logout():
     current_app.logger.debug('%s has logged out', current_user.email)
     logout_user()
     return redirect('/')
 
 
-@login_required
 @users.route('/profile')
+@login_required
 def profile():
     pass
 

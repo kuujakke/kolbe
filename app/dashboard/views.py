@@ -7,8 +7,8 @@ from app.tags.models import Tag
 from . import dashboard
 
 
-@login_required
 @dashboard.route('/')
+@login_required
 def index():
     return render_template('dashboard/index.html',
                            title="Dashboard",

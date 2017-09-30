@@ -8,8 +8,8 @@ from app.comments.models import Comment
 from app.tags.models import Tag
 
 
-@login_required
 @database.route('/')
+@login_required
 def index():
     return render_template('database/index.html',
                            title="Database",

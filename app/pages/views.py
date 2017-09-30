@@ -1,4 +1,6 @@
 from flask import current_app as app, render_template, redirect, Markup
+from flask_login import login_required
+
 from . import pages
 from app.pages.models import Page
 from flask_wtf import Form
@@ -16,6 +18,7 @@ def index():
 
 
 @pages.route('/new', methods=["POST", "GET"])
+@login_required
 def new():
     user_id = 1
     page = Page(('', user_id, ''))
@@ -41,6 +44,7 @@ def show(page_id):
 
 
 @pages.route('/<page_id>/edit', methods=["POST", "GET"])
+@login_required
 def edit(page_id):
     page = Page.get_page(Page(), page_id)
     form = EditForm(secret_key=app.config['SECRET_KEY'], obj=page)
@@ -54,6 +58,7 @@ def edit(page_id):
 
 
 @pages.route('/<page_id>/delete', methods=["POST"])
+@login_required
 def delete(page_id):
     Page.delete_page(Page((page_id, '', '')))
     return redirect('/pages')

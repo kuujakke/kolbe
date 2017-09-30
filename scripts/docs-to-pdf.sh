@@ -2,7 +2,7 @@
 
 FILES=""
 
-cd ../doc
+cd doc
 
 while read FILE; do
   if [ -f ${FILE} ]; then

@@ -1,3 +1,4 @@
+\newpage
 # Käynnistys- / käyttöohje
 
 Harjoitustyö on asennettuna osoitteessa: http://kolbe.eu-central-1.elasticbeanstalk.com
@@ -23,8 +24,37 @@ RDS_DB_NAME | kolbe
 RDS_USERNAME | kuujakke
 SECRET_KEY | R4/OyNkVoYWZRibbSqQoSZlR6xqLi9Qw
 
-## Sovelluksen käynnistäminen
+\newpage
 
-- Asenna riippuvuudet komennolla: ```sudo pip install -r requirements.txt```
+## Sovelluksen käynnistäminen paikallisesti
 
-- Aja komennolla ```export YMPÄRISTÖMUUTTUJAT python application.py```
+Ohjeet on yhteensopivia Cubbli/Ubuntu käyttöjärjestelmien kanssa.
+
+### Esivalmistelut
+
+- Asenna [Python3](https://www.python.org/) ja [virtualenv](https://virtualenv.pypa.io/en/stable/) komennolla:
+
+	```sudo apt install python3-dev python3-pip -y && sudo pip install virtualenv```
+
+- Luo uusi virtuaaliympäristö ja ota ympäristö käyttöön komennolla:
+	
+	```virtualenv kolbe-env && source kolbe-env/bin/activate```
+
+
+### Sovelluksen lataaminen
+
+- Kloonaa git repository komennolla ja siirry sovelluksen kansioon:
+
+	```git clone https://github.com/kuujakke/kolbe.git && cd kolbe```
+
+### Riippuvuuksien asentaminen
+
+- Asenna riippuvuudet komennolla: 
+
+	```pip install -r requirements.txt```
+
+### Käynnistäminen
+
+- Sovelluksen käynnistäminen käy helposti skriptillä: 
+
+	```./scripts/start.sh```

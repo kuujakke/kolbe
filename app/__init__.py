@@ -17,8 +17,8 @@ nav = Nav()
 @nav.navigation()
 def navbar():
     if current_user.is_authenticated:
-        return Navbar('kolbe',
-            View('Dashboard', 'dashboard.index'),
+        return Navbar(
+            View('Kolbe', 'dashboard.index'),
             View('Pages', 'pages.index'),
             View('Tags', 'tags.index'),
             View('Users', 'users.index'),

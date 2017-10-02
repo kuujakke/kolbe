@@ -8,7 +8,6 @@ from . import dashboard
 
 
 @dashboard.route('/')
-@login_required
 def index():
     return render_template('dashboard/index.html',
                            title="Dashboard",

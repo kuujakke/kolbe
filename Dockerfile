@@ -15,4 +15,4 @@ COPY . /usr/src/app
 
 EXPOSE 5000
 
-ENTRYPOINT ["uwsgi", "--http", "0.0.0.0:80", "--module", "app:app", "--processes", "1", "--threads", "8"]
+ENTRYPOINT ["uwsgi", "--http", "0.0.0.0:80", "--wsgi-file", "application.py", "--processes", "1", "--threads", "8", "--master"]

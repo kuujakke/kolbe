@@ -27,6 +27,8 @@ def login():
             flash('Logged in successfully.', 'success')
             return redirect('/')
         flash('Wrong email or password.', 'danger')
+    elif form.is_submitted():
+        flash('Make sure both fields contain something!', 'warning')
     return render_template('users/login.html', form=form, error=error)
 
 

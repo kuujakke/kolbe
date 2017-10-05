@@ -7,7 +7,7 @@
                     <h1>Recent pages</h1>
                     <ul class="list-group">
                     {% for page in pages %}
-                        <li class="list-group-item"><a href="/pages/{{ page.id }}">{{ page.content[0:50] }}</a></li>
+                        <li class="list-group-item"><a href="/pages/{{ page.page_id }}">{{ page.content[0:50] }}</a></li>
                     {% endfor %}
                     </ul>
                 </div>
@@ -29,7 +29,7 @@
                     <h1>Popular tags</h1>
                     <ul class="list-group">
                     {% for tag in tags %}
-                        <li class="list-group-item"><a href="/tags/{{ tag.id }}">{{ tag.content[0:50] }}</a></li>
+                        <li class="list-group-item"><a href="/tags/{{ tag.tag_id }}">{{ tag.content[0:50] }}</a></li>
                     {% endfor %}
                     </ul>
                 </div>

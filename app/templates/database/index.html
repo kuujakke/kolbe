@@ -12,7 +12,7 @@
         </thead>
         {% for page in pages %}
             <tr>
-                <td>{{ page.id }}</td>
+                <td>{{ page.page_id }}</td>
                 <td>{{ page.user_id }}</td>
                 <td>{{ page.content[0:50] }}</td>
             </tr>
@@ -30,7 +30,7 @@
         </thead>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
+                <td>{{ user.user_id }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.password }}</td>
             </tr>
@@ -49,7 +49,7 @@
         </thead>
         {% for comment in comments %}
             <tr>
-                <td>{{ comment.id }}</td>
+                <td>{{ comment.comment_id }}</td>
                 <td>{{ comment.page_id }}</td>
                 <td>{{ comment.user_id }}</td>
                 <td>{{ comment.content }}</td>
@@ -68,7 +68,7 @@
         </thead>
         {% for tag in tags %}
             <tr>
-                <td>{{ tag.id }}</td>
+                <td>{{ tag.tag_id }}</td>
                 <td>{{ tag.page_id }}</td>
                 <td>{{ tag.content }}</td>
             </tr>

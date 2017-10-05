@@ -16,12 +16,12 @@
                 </thead>
                 {% for page in pages %}
                     <tr>
-                        <td>{{ page.id }}</td>
+                        <td>{{ page.page_id }}</td>
                         <td>{{ page.user_id }}</td>
                         <td>{{ page.content[0:50] }}</td>
                         <td class="btn btn-group">
-                            <a href="{{ page.id }}" class="btn btn-primary">Show</a>
-                            <a href="{{ page.id }}/edit" class="btn btn-warning">Edit</a>
+                            <a href="{{ page.page_id }}" class="btn btn-primary">Show</a>
+                            <a href="{{ page.page_id }}/edit" class="btn btn-warning">Edit</a>
                         </td>
                     </tr>
                 {% endfor %}

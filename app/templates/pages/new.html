@@ -4,6 +4,7 @@
     {{ pagedown.include_pagedown() }}
 {% endblock %}
 {% block content %}
+    {{ super() }}
     <form method="POST">
         {{ form.csrf_token }}
         {{ form.user_id }}

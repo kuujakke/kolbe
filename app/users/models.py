@@ -16,7 +16,7 @@ class User(DB, UserMixin):
         return "ID: %s, Email: %s, Password: %s" % (self.user_id, self.email, self.password)
 
     def all(self):
-        rows = self.execute("""SELECT "id", "email", "password" FROM "users";""")
+        rows = self.execute("""SELECT "user_id", "email", "password" FROM users;""")
         users = []
         for row in rows:
             user = User(row)
@@ -29,7 +29,7 @@ class User(DB, UserMixin):
         self.execute(sql, (user.user_id, user.password))
 
     def get(self, user_id):
-        sql = """SELECT "user_id", "email", "password" FROM "users" WHERE "user_id" = %s;"""
+        sql = """SELECT "user_id", "email", "password" FROM users WHERE "user_id" = %s;"""
         rows = self.execute(sql, (user_id,))
         if rows:
             return User(rows[0])

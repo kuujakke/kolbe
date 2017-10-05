@@ -22,13 +22,11 @@ def login():
     error = None
     if form.validate_on_submit():
         user = User.verify(User(), form.email.data, form.password.data)
-        if user is not None:
-            if login_user(user):
-                current_app.logger.debug('%s has logged in', user.email)
-                flash('Logged in successfully.')
-                return redirect('/')
-        flash('Wrong email or password.')
-        error = "Wrong email or password."
+        if user is not None and login_user(user):
+            current_app.logger.debug('%s has logged in', user.email)
+            flash('Logged in successfully.', 'success')
+            return redirect('/')
+        flash('Wrong email or password.', 'danger')
     return render_template('users/login.html', form=form, error=error)
 
 
@@ -36,6 +34,7 @@ def login():
 @login_required
 def logout():
     current_app.logger.debug('%s has logged out', current_user.email)
+    flash('Logged out', 'info')
     logout_user()
     return redirect('/')
 

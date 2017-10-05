@@ -4,6 +4,7 @@
     {{ pagedown.include_pagedown() }}
 {% endblock %}
 {% block content %}
+    {{ super() }}
     <div class="container-fluid">
         <form method="POST">
             {{ form.csrf_token }}

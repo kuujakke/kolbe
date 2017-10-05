@@ -1,4 +1,4 @@
-from flask import current_app as app, render_template, redirect, Markup
+from flask import current_app as app, render_template, redirect, Markup, flash
 from flask_login import login_required
 
 from . import pages
@@ -25,8 +25,11 @@ def new():
     form = NewForm(secret_key=app.config['SECRET_KEY'], obj=page)
     if form.validate_on_submit():
         form.populate_obj(page)
-        Page.new_page(page)
+        Page.new_page(page, page)
+        flash('New page created successfully!', 'success')
         return redirect('/pages')
+    elif form.is_submitted():
+        flash('The new page can\'t be empty!', 'warning')
     return render_template('pages/new.html',
                            title="New Page",
                            form=form)
@@ -51,7 +54,10 @@ def edit(page_id):
     if form.validate_on_submit():
         form.populate_obj(page)
         page.save_page()
+        flash('Page edited successfully.', 'success')
         return redirect('/pages/%s' % page_id)
+    elif form.is_submitted():
+        flash('Can\'t submit empty page!', 'warning')
     return render_template('pages/edit.html',
                            title="Edit Page",
                            form=form)
@@ -61,6 +67,7 @@ def edit(page_id):
 @login_required
 def delete(page_id):
     Page.delete_page(Page((page_id, '', '')))
+    flash('Page deleted successfully!', 'success')
     return redirect('/pages')
 
 

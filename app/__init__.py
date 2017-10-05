@@ -71,5 +71,4 @@ def create_app(config_name):
     from .dashboard import dashboard as dashboard_blueprint
     application.register_blueprint(dashboard_blueprint, url_prefix='/')
 
-
     return application

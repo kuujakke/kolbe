@@ -14,6 +14,7 @@ csrf = CsrfProtect()
 
 nav = Nav()
 
+
 @nav.navigation()
 def navbar():
     if current_user.is_authenticated:

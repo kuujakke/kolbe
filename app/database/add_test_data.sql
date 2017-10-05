@@ -1,6 +1,4 @@
 INSERT INTO "users" (email, password) VALUES ('testi@helsinki.fi', 'salaisuus');
-INSERT INTO "comments" (page_id, user_id, content) VALUES (1, 1, 'Testikommentti **painokkaasti** ilmaistuna');
-INSERT INTO "tags" (page_id, content) VALUES (1, 'Testiaiheentunnistin');
 
 INSERT INTO "pages" (user_id, content) VALUES (1, '# Circumspicit fuit aeolis pater
 
@@ -58,3 +56,7 @@ Well, the way they make shows is, they make one show. That show`s called a pilot
 Now that there is the _Tec-9_, a crappy spray gun from South Miami. This gun is advertised as the most popular gun in American crime. Do you believe that shit? It actually says that in the little book that comes with it: the most popular gun in American crime. Like they`re actually proud of that shit. 
 
 Your bones don`t break, mine do. That`s clear. Your cells react to bacteria and viruses differently than mine. You don`t get sick, I do. That`s also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We`re on the same curve, just on opposite ends. ');
+
+INSERT INTO "comments" (page_id, user_id, content) VALUES (1, 1, 'Testikommentti **painokkaasti** ilmaistuna');
+
+INSERT INTO "tags" (page_id, content) VALUES (1, 'Testiaiheentunnistin');

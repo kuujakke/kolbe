@@ -29,7 +29,7 @@ class User(DB, UserMixin):
         self.execute(sql, (user.user_id, user.password))
 
     def get(self, user_id):
-        sql = """SELECT "user_id", "email", "password" FROM "users" WHERE "id" = %s;"""
+        sql = """SELECT "user_id", "email", "password" FROM "users" WHERE "user_id" = %s;"""
         rows = self.execute(sql, (user_id,))
         if rows:
             return User(rows[0])

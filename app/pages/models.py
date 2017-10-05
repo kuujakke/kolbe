@@ -1,3 +1,4 @@
+from app.comments.models import Comment
 from app.models import DB
 
 
@@ -36,3 +37,6 @@ class Page(DB):
     def delete_page(self):
         sql = """DELETE FROM pages WHERE "page_id" = %s;"""
         self.execute(sql, (self.page_id,))
+
+    def get_comments(self):
+        return Comment.get_by_page_id(Comment(), self.page_id)

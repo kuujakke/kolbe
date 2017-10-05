@@ -15,7 +15,9 @@
             </div>
             <div class="panel panel-default col-md-6">
                 <div class="panel-heading">
-                    <h1>Recent comments</h1>
+                    <h1 class="panel-title">Recent comments</h1>
+                </div>
+                <div class="panel-body">
                     <ul class="list-group">
                     {% for comment in comments %}
                         <li class="list-group-item"><a href="/pages/{{ comment.page_id }}">{{ comment.content[0:50] }}</a></li>

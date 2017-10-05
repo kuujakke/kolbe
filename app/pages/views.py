@@ -1,7 +1,8 @@
 from flask import current_app as app, render_template, redirect, Markup, flash
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from . import pages
+from app.comments.models import Comment
 from app.pages.models import Page
 from flask_wtf import Form
 from wtforms import HiddenField
@@ -20,8 +21,7 @@ def index():
 @pages.route('/new', methods=["POST", "GET"])
 @login_required
 def new():
-    user_id = 1
-    page = Page(('', user_id, ''))
+    page = Page(('', current_user.user_id, ''))
     form = NewForm(secret_key=app.config['SECRET_KEY'], obj=page)
     if form.validate_on_submit():
         form.populate_obj(page)
@@ -35,15 +35,28 @@ def new():
                            form=form)
 
 
-@pages.route('/<page_id>')
+@pages.route('/<page_id>', methods=["POST", "GET"])
 def show(page_id):
     page = Page.get_page(Page(), page_id)
+    form = CommentForm(secret_key=app.config['SECRET_KEY'])
     content = Markup(markdown.markdown(page.content))
+    comments = process_comments(page.get_comments())
+    comment = Comment(('', current_user.user_id, page_id, ''))
+    print(form.content)
+    if form.validate_on_submit():
+        form.populate_obj(comment)
+        comment.save_comment()
+        flash('Comment posted successfully!', 'success')
+        return redirect('/pages/%s' % page_id)
+    elif form.is_submitted():
+        flash('Can\'t post if there is no content!', 'warning')
     return render_template('pages/show.html',
                            title="Show Page",
                            content=content,
                            page_id=page_id,
-                           form=Form(secret_key=app.config['SECRET_KEY']))
+                           comments=comments,
+                           comment=comment,
+                           form=form)
 
 
 @pages.route('/<page_id>/edit', methods=["POST", "GET"])
@@ -71,11 +84,23 @@ def delete(page_id):
     return redirect('/pages')
 
 
+def process_comments(comments):
+    if comments:
+        for comment in comments:
+            comment.content = Markup(markdown.markdown(comment.content))
+    return comments
+
+
 class EditForm(Form):
     user_id = HiddenField('user_id', validators=[DataRequired()])
     content = PageDownField('content', validators=[DataRequired()])
 
 
 class NewForm(EditForm):
+    user_id = HiddenField('user_id', validators=[DataRequired()])
+    content = PageDownField('content', validators=[DataRequired()])
+
+
+class CommentForm(Form):
     user_id = HiddenField('user_id', validators=[DataRequired()])
     content = PageDownField('content', validators=[DataRequired()])

@@ -1,37 +1,81 @@
 {% extends 'base.html' %}
+{% block head %}
+    {{ super() }}
+    {{ pagedown.include_pagedown() }}
+{% endblock %}
 {% block content %}
     {{ super() }}
     <div class="container-fluid">
         <div class="row">
-            <div class="well col-lg-8 col-lg-offset-2">
+            <div class="well col-md-10 col-md-offset-1">
                 {{ content }}
             </div>
         </div>
         <div class="row">
-            <div class="btn-group col-lg-8 col-lg-offset-2">
-                <form action="/pages/{{ page_id }}/delete" method="post">
-                    {{ form.csrf_token }}
-                    <a href="/pages" class="btn btn-primary col-lg-4">Back</a>
-                    <a href="/pages/{{ page_id }}/edit" class="btn btn-warning col-lg-4">Edit</a>
-                    <input type="submit" value="Delete" class="btn btn-danger col-lg-4"/>
-                </form>
-            </div>
-        </div>
-        {% for comment in comments %}
-            <div class="row">
-                <div class="well col-lg-8 col-lg-offset-2">
-                    <ul>
-                        <li class="list-group-item panel panel-default">
-                            <div class="panel-heading">
-                                {{ comment.user_id }}
-                            </div>
-                            <div class="panel-body">
-                                {{ comment.content }}
-                            </div>
-                        </li>
-                    </ul>
+            <div class="well col-md-10 col-md-offset-1">
+                <div class="row">
+                    <div class="btn-group col-md-4 col-md-offset-4">
+                        <form action="/pages/{{ page_id }}/delete" method="post">
+                            {{ form.csrf_token }}
+                            <a href="/pages" class="btn btn-primary col-md-4">Back</a>
+                            <a href="/pages/{{ page_id }}/edit" class="btn btn-warning col-md-4">Edit</a>
+                            <input type="submit" value="Delete" class="btn btn-danger col-md-4"/>
+                        </form>
+                    </div>
                 </div>
             </div>
-        {% endfor %}
+        </div>
+        <div class="row">
+            <div class="panel panel-default col-md-10 col-md-offset-1">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Comments:</h3>
+                </div>
+                {% if comments %}
+                    <div class="row">
+                        <div class="panel-body">
+                            {% for comment in comments %}
+                                <div class="well col-md-8 col-md-offset-2">
+                                    <ul>
+                                        <li class="list-group-item panel panel-default">
+                                            <div class="panel-heading">
+                                                {{ comment.user_id }}
+                                            </div>
+                                            <div class="panel-body">
+                                                {{ comment.content }}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if current_user %}
+                {% endif %}
+                <div class="row">
+                    <div class="panel-footer">
+                        <form method="POST">
+                            {{ form.csrf_token }}
+                            {{ form.user_id }}
+                            <div class="row">
+                                <div class="form-group well col-md-10 col-md-offset-1">
+                                    {{ form.content(only_preview=True) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-10 col-md-offset-1">
+                                    {{ form.content(class='form-control', only_input=True) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="btn-group col-md-4 col-md-offset-4">
+                                    <input type="submit" value="Post" class="btn btn-warning col-md-12">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

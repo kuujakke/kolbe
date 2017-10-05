@@ -1,24 +1,24 @@
 CREATE TABLE "users" (
-  id SERIAL PRIMARY KEY,
+  user_id SERIAL PRIMARY KEY,
   email text NOT NULL,
   password text NOT NULL
 );
 
 CREATE TABLE "pages" (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES "users",
+  page_id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES "users" ON DELETE SET NULL,
   content text
 );
 
 CREATE TABLE "comments" (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES "users",
-  page_id INTEGER REFERENCES "pages",
+  comment_id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES "users" ON DELETE SET NULL,
+  page_id INTEGER REFERENCES "pages" ON DELETE CASCADE,
   content text
 );
 
 CREATE TABLE "tags" (
-  id SERIAL PRIMARY KEY,
-  page_id INTEGER REFERENCES "pages",
+  tag_id SERIAL PRIMARY KEY,
+  page_id INTEGER REFERENCES "pages" ON DELETE CASCADE,
   content text
 );

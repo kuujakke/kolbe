@@ -4,10 +4,10 @@ from app.models import DB
 class Comment(DB):
     def __init__(self, data=None):
         if data:
-            self.id, self.user_id, self.page_id, self.content = data
+            self.comment_id, self.user_id, self.page_id, self.content = data
 
     def get_all_comments(self):
-        rows = self.execute("""SELECT "id", "user_id", "page_id", "content" FROM "comments";""")
+        rows = self.execute("""SELECT "comment_id", "user_id", "page_id", "content" FROM comments;""")
         comments = []
         for row in rows:
             comment = Comment(row)
@@ -20,14 +20,14 @@ class Comment(DB):
         self.execute(sql, (comment.user_id, comment.page_id, comment.content))
 
     def get_comment(self, comment):
-        sql = """SELECT "id", "user_id", "page_id", "content" FROM "comments" WHERE "id" = %s;"""
+        sql = """SELECT "comment_id", "user_id", "page_id", "content" FROM comments WHERE "comment_id" = %s;"""
         rows = self.execute(sql, (comment.id,))
         if rows:
             return Comment(rows[0])
 
     def save_comment(self, comment):
-        sql = """UPDATE comments SET "user_id" = %s, "content" = %s WHERE "id" = %s;"""
-        self.execute(sql, (comment.user_id, comment.content, comment.id))
+        sql = """UPDATE comments SET "user_id" = %s, "content" = %s WHERE "comment_id" = %s;"""
+        self.execute(sql, (comment.user_id, comment.content, comment.comment_id))
 
     def recent_comments(self, count):
         # Tähän komento joka hakee 'count' verran viimeisimpiä kommentteja

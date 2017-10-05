@@ -4,10 +4,10 @@ from app.models import DB
 class Tag(DB):
     def __init__(self, data=None):
         if data:
-            self.id, self.page_id, self.content = data
+            self.tag_id, self.page_id, self.content = data
 
     def get_all_tags(self):
-        rows = self.execute("""SELECT "id", "page_id", "content" FROM "tags";""")
+        rows = self.execute("""SELECT "tag_id", "page_id", "content" FROM tags;""")
         tags = []
         for row in rows:
             tag = Tag(row)
@@ -20,13 +20,13 @@ class Tag(DB):
         self.execute(sql, (tag.page_id, tag.content))
 
     def get_tag(self, tag):
-        sql = """SELECT "id", "page_id", "content" FROM "tags" WHERE "id" = %s;"""
+        sql = """SELECT "tag_id", "page_id", "content" FROM tags WHERE "tag_id" = %s;"""
         rows = self.execute(sql, (tag.id,))
         if rows:
             return Tag(rows[0])
 
     def save_tag(self, tag):
-        sql = """UPDATE tags SET "page_id" = %s, "content" = %s WHERE "id" = %s;"""
+        sql = """UPDATE tags SET "page_id" = %s, "content" = %s WHERE "tag_id" = %s;"""
         self.execute(sql, (tag.user_id, tag.content, tag.id))
 
     def popular_tags(self, count):

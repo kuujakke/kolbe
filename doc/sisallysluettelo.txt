@@ -2,4 +2,6 @@ johdanto.md
 kayttotapaukset.md
 jarjestelman-tietosisalto.md
 relaatiotietokantakaavio.md
+jarjestelman-yleisrakenne.md
+kayttoliittyma-ja-jarjestelman-komponentit.md
 kaynnistys-ja-kayttoohje.md

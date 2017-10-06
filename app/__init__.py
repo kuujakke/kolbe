@@ -53,8 +53,9 @@ def create_app(config_name):
     pagedown = PageDown(application)
 
     login_manager.init_app(application)
-    login_manager.login_message = "Login to access this page"
     login_manager.login_view = "users.login"
+    login_manager.login_message = 'Please login to access this page.'
+    login_manager.login_message_category = "info"
 
     from .pages import pages as pages_blueprint
     application.register_blueprint(pages_blueprint, url_prefix='/pages')

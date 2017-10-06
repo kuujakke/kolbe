@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from . import pages
 from app.comments.models import Comment
 from app.pages.models import Page
+from app.users.models import User
 from flask_wtf import Form
 from wtforms import HiddenField
 from wtforms.validators import DataRequired
@@ -38,14 +39,13 @@ def new():
 @pages.route('/<page_id>', methods=["POST", "GET"])
 def show(page_id):
     page = Page.get_page(Page(), page_id)
-    form = CommentForm(secret_key=app.config['SECRET_KEY'])
+    comment = Comment(('', current_user.user_id, page_id, ''))
+    form = CommentForm(secret_key=app.config['SECRET_KEY'], obj=comment)
     content = Markup(markdown.markdown(page.content))
     comments = process_comments(page.get_comments())
-    comment = Comment(('', current_user.user_id, page_id, ''))
-    print(form.content)
     if form.validate_on_submit():
         form.populate_obj(comment)
-        comment.save_comment()
+        comment.new_comment(comment)
         flash('Comment posted successfully!', 'success')
         return redirect('/pages/%s' % page_id)
     elif form.is_submitted():
@@ -87,6 +87,7 @@ def delete(page_id):
 def process_comments(comments):
     if comments:
         for comment in comments:
+            comment.user_email = User.get(User(), comment.user_id).email
             comment.content = Markup(markdown.markdown(comment.content))
     return comments
 

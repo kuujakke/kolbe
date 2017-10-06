@@ -28,17 +28,39 @@
         <div class="row">
             <div class="panel panel-default col-md-10 col-md-offset-1">
                 <div class="panel-heading">
+                    <h3 class="panel-title">Tags:</h3>
+                </div>
+                    {% if tags %}
+                        <div class="panel-body">
+                            <ul>
+                            {% for tag in tags %}
+                                    <div class="panel-body">
+                                        {{ tag.content }}
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default col-md-10 col-md-offset-1">
+                <div class="panel-heading">
                     <h3 class="panel-title">Comments:</h3>
                 </div>
                 {% if comments %}
                     <div class="row">
                         <div class="panel-body">
                             {% for comment in comments %}
-                                <div class="well col-md-8 col-md-offset-2">
+                                <div>
                                     <ul>
                                         <li class="list-group-item panel panel-default">
                                             <div class="panel-heading">
-                                                {{ comment.user_id }}
+                                                <div class="panel-title">
+                                                    {{ comment.user_email }}
+                                                </div>
                                             </div>
                                             <div class="panel-body">
                                                 {{ comment.content }}
@@ -49,8 +71,6 @@
                             {% endfor %}
                         </div>
                     </div>
-                {% endif %}
-                {% if current_user %}
                 {% endif %}
                 <div class="row">
                     <div class="panel-footer">

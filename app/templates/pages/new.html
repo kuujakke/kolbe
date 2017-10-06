@@ -5,14 +5,30 @@
 {% endblock %}
 {% block content %}
     {{ super() }}
-    <form method="POST">
-        {{ form.csrf_token }}
-        {{ form.user_id }}
-
-        <div class="form-group">
-            {{ form.content(rows='25', cols='20', class='form-control') }}
+    <div class="container-fluid">
+        <div class="panel panel-default col-md-10 col-md-offset-1">
+            <div class="panel-body">
+                <form method="POST">
+                    {{ form.csrf_token }}
+                    {{ form.user_id }}
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            {{ form.content(rows='30', cols='10', class='form-control', only_input=True) }}
+                        </div>
+                        <div class="form-group col-md-6 well">
+                            {{ form.content(rows='30', cols='10', only_preview=True) }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <input type="submit" value="Create" class="btn btn-success col-md-6 col-md-offset-3">
+                </div>
+                <div class="row">
+                    <a href="/pages" class="btn btn-primary col-md-6 col-md-offset-3">Cancel</a>
+                </div>
+            </div>
         </div>
-        <input type="submit" value="Create" class="btn bg-primary">
-    </form>
-    <a href="/pages" class="btn btn-danger">Cancel</a>
+    </div>
 {% endblock %}

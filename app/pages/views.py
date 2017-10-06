@@ -53,7 +53,11 @@ def show(page_id):
         flash('Comment posted successfully!', 'success')
         return redirect('/pages/%s' % page_id)
     elif form.is_submitted():
-        flash('Can\'t post if there is no content!', 'warning')
+        if current_user.is_authenticated:
+            flash('Can\'t post if there is no content!', 'warning')
+        else:
+            flash('You must login first to post a comment!', 'info')
+            return redirect('/users/login')
     return render_template('pages/show.html',
                            title="Show Page",
                            content=content,

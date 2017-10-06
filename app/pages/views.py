@@ -39,10 +39,14 @@ def new():
 @pages.route('/<page_id>', methods=["POST", "GET"])
 def show(page_id):
     page = Page.get_page(Page(), page_id)
-    comment = Comment(('', current_user.user_id, page_id, ''))
-    form = CommentForm(secret_key=app.config['SECRET_KEY'], obj=comment)
     content = Markup(markdown.markdown(page.content))
-    comments = process_comments(page.get_comments())
+    if current_user.is_authenticated:
+        comment = Comment(('', current_user.user_id, page_id, ''))
+        comments = process_comments(page.get_comments())
+    else:
+        comment = None
+        comments = []
+    form = CommentForm(secret_key=app.config['SECRET_KEY'], obj=comment)
     if form.validate_on_submit():
         form.populate_obj(comment)
         comment.new_comment(comment)

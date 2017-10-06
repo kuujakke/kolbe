@@ -30,7 +30,7 @@ def navbar():
         )
     else:
         return Navbar(
-            'kolbe',
+            View('Kolbe', 'pages.index'),
             View('Pages', 'pages.index'),
             View('Tags', 'tags.index'),
             View('Login', 'users.login')

@@ -31,7 +31,7 @@ class Page(DB):
             return Page((rows[0][0], rows[0][1], rows[0][2]))
 
     def save_page(self):
-        sql = """UPDATE pages SET "user_id" = %s, "content" = %s WHERE "page_id" = %s""";
+        sql = """UPDATE pages SET "user_id" = %s, "content" = %s WHERE "page_id" = %s;""";
         self.execute(sql, (self.user_id, self.content, self.page_id))
 
     def delete_page(self):

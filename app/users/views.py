@@ -44,7 +44,7 @@ def logout():
 @users.route('/profile')
 @login_required
 def profile():
-    pass
+    return render_template('users/profile.html', user=current_user)
 
 
 class LoginForm(Form):

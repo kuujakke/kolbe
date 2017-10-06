@@ -3,38 +3,46 @@
     {{ super() }}
     <div class="container-fluid">
         <div class="row">
-            <div class="panel panel-default col-md-6">
-                <div class="panel-heading">
-                    <h1>Recent pages</h1>
-                    <ul class="list-group">
-                    {% for page in pages %}
-                        <li class="list-group-item"><a href="/pages/{{ page.page_id }}">{{ page.content[0:50] }}</a></li>
-                    {% endfor %}
-                    </ul>
+            <div class="col-md-10 col-md-offset-1">
+                <div class="row">
+                    <div class="panel panel-default col-md-5">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Recent pages</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                            {% for page in pages %}
+                                <li class="list-group-item"><a href="/pages/{{ page.page_id }}">{{ page.content[0:50] }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel panel-default col-md-5 col-md-offset-1">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Recent comments</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                            {% for comment in comments %}
+                                <li class="list-group-item"><a href="/pages/{{ comment.page_id }}">{{ comment.content[0:50] }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="panel panel-default col-md-6">
-                <div class="panel-heading">
-                    <h1 class="panel-title">Recent comments</h1>
-                </div>
-                <div class="panel-body">
-                    <ul class="list-group">
-                    {% for comment in comments %}
-                        <li class="list-group-item"><a href="/pages/{{ comment.page_id }}">{{ comment.content[0:50] }}</a></li>
-                    {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="panel panel-default col-md-12">
-                <div class="panel-heading">
-                    <h1>Popular tags</h1>
-                    <ul class="list-group">
-                    {% for tag in tags %}
-                        <li class="list-group-item"><a href="/tags/{{ tag.tag_id }}">{{ tag.content[0:50] }}</a></li>
-                    {% endfor %}
-                    </ul>
+                <div class="row">
+                    <div class="panel panel-default col-md-12">
+                        <div class="panel-heading">
+                            <h3>Popular tags</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                            {% for tag in tags %}
+                                <li class="list-group-item"><a href="/tags/{{ tag.tag_id }}">{{ tag.content[0:50] }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

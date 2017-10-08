@@ -1,5 +1,6 @@
 from app.comments.models import Comment
 from app.models import DB
+from app.tags.models import Tag
 
 
 class Page(DB):
@@ -40,3 +41,6 @@ class Page(DB):
 
     def get_comments(self):
         return Comment.get_by_page_id(Comment(), self.page_id)
+
+    def get_tags(self):
+        return Tag.get_by_page_id(Tag(), self.page_id)

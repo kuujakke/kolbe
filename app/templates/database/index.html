@@ -62,14 +62,12 @@
         <thead>
             <tr>
                 <th>Tag ID</th>
-                <th>Page ID</th>
                 <th>Content</th>
             </tr>
         </thead>
         {% for tag in tags %}
             <tr>
                 <td>{{ tag.tag_id }}</td>
-                <td>{{ tag.page_id }}</td>
                 <td>{{ tag.content }}</td>
             </tr>
         {% endfor %}

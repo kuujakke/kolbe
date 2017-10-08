@@ -19,6 +19,11 @@ CREATE TABLE "comments" (
 
 CREATE TABLE "tags" (
   tag_id SERIAL PRIMARY KEY,
-  page_id INTEGER REFERENCES "pages" ON DELETE CASCADE,
   content text
+);
+
+CREATE TABLE "page_tags" (
+  page_tag_id SERIAL PRIMARY KEY,
+  page_id INTEGER REFERENCES "pages" ON DELETE CASCADE,
+  tag_id INTEGER REFERENCES "tags" ON DELETE CASCADE
 );

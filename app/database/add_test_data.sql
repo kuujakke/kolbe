@@ -68,4 +68,16 @@ aamuisin hänen luita aura rikkaus.
 Hän sanoi: Hän otti toisistaan ​​poikkeavissa olosuhteissa: Raskas, miksi on pelko siitä, että myötäjäiset.
 Äiti.');
 
-INSERT INTO "tags" (page_id, content) VALUES (1, 'Testiaiheentunnistin');
+INSERT INTO "tags" (content) VALUES ('Lorem Ipsum');
+
+INSERT INTO "tags" (content) VALUES ('Samuel L. Ipsum');
+
+INSERT INTO "tags" (content) VALUES ('Hölynpöly');
+
+INSERT INTO "page_tags" (page_id, tag_id) VALUES (1, 1);
+
+INSERT INTO "page_tags" (page_id, tag_id) VALUES (2, 1);
+
+INSERT INTO "page_tags" (page_id, tag_id) VALUES (2, 2);
+
+INSERT INTO "page_tags" (page_id, tag_id) VALUES (1, 3);

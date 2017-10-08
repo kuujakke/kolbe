@@ -9,13 +9,13 @@
             <table width="100%" class="table table-bordered table-striped table-hover table-responsive">
                 <thead>
                     <tr>
-                        <th>Page ID</th>
+                        <th>Tag ID</th>
                         <th>Content</th>
                     </tr>
                 </thead>
                 {% for tag in tags %}
                     <tr>
-                        <td>{{ tag.page_id }}</td>
+                        <td>{{ tag.tag_id }}</td>
                         <td>{{ tag.content }}</td>
                     </tr>
                 {% endfor %}

@@ -40,6 +40,7 @@ def new():
 def show(page_id):
     page = Page.get_page(Page(), page_id)
     content = Markup(markdown.markdown(page.content))
+    tags = page.get_tags()
     if current_user.is_authenticated:
         comment = Comment(('', current_user.user_id, page_id, ''))
         comments = process_comments(page.get_comments())
@@ -64,6 +65,7 @@ def show(page_id):
                            page_id=page_id,
                            comments=comments,
                            comment=comment,
+                           tags=tags,
                            form=form)
 
 

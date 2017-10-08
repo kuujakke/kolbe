@@ -33,13 +33,12 @@
                     {% if tags %}
                         <div class="panel-body">
                             <ul>
-                            {% for tag in tags %}
-                                    <div class="panel-body">
+                                {% for tag in tags %}
+                                    <li>
                                         {{ tag.content }}
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     {% endif %}
                 </div>

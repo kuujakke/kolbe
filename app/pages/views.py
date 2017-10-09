@@ -1,5 +1,6 @@
 from flask import current_app as app, render_template, redirect, Markup, flash
 from flask_login import login_required, current_user
+from html import escape
 
 from . import pages
 from app.comments.models import Comment
@@ -102,16 +103,20 @@ def process_comments(comments):
     return comments
 
 
+def sanitize_field(form, field):
+    field.data = escape(field.data)
+
+
 class EditForm(Form):
-    user_id = HiddenField('user_id', validators=[DataRequired()])
-    content = PageDownField('content', validators=[DataRequired()])
+    user_id = HiddenField('user_id', validators=[DataRequired(), sanitize_field])
+    content = PageDownField('content', validators=[DataRequired(), sanitize_field])
 
 
 class NewForm(EditForm):
-    user_id = HiddenField('user_id', validators=[DataRequired()])
-    content = PageDownField('content', validators=[DataRequired()])
+    user_id = HiddenField('user_id', validators=[DataRequired(), sanitize_field])
+    content = PageDownField('content', validators=[DataRequired(), sanitize_field])
 
 
 class CommentForm(Form):
-    user_id = HiddenField('user_id', validators=[DataRequired()])
-    content = PageDownField('content', validators=[DataRequired()])
+    user_id = HiddenField('user_id', validators=[DataRequired(), sanitize_field])
+    content = PageDownField('content', validators=[DataRequired(), sanitize_field])

@@ -21,10 +21,10 @@
                             <td>{{ tag.tag_id }}</td>
                             <td>{{ tag.content }}</td>
                             <td>
-                                <div class="btn-group">
+                                <div class="btn-group col-md-12">
                                     <form action="/tags/{{ tag.tag_id }}/delete" method="POST">
                                         {{ form.csrf_token }}
-                                        <a href="/tags/{{ tag.tag_id }}/edit" class="btn btn-warning col-md-4">Edit</a>
+                                        <a href="/tags/{{ tag.tag_id }}/edit" class="btn btn-warning col-md-offset-2 col-md-4">Edit</a>
                                         <input type="submit" value="Delete" class="btn btn-danger col-md-4"/>
                                     </form>
                                 </div>

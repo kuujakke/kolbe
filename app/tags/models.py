@@ -23,15 +23,19 @@ class Tag(DB):
         sql = """INSERT INTO tags ("content") VALUES (%s);"""
         self.execute(sql, (tag.content,))
 
-    def get_tag(self, tag):
+    def get_tag(self, tag_id):
         sql = """SELECT "tag_id", "content" FROM tags WHERE "tag_id" = %s;"""
-        rows = self.execute(sql, (tag.id,))
+        rows = self.execute(sql, (tag_id,))
         if rows:
             return Tag(rows[0])
 
     def save_tag(self, tag):
         sql = """UPDATE tags SET "content" = %s WHERE "tag_id" = %s;"""
-        self.execute(sql, (tag.content, tag.id))
+        self.execute(sql, (tag.content, tag.tag_id))
+
+    def delete_tag(self, tag):
+        sql = """DELETE FROM tags WHERE "tag_id" = %s;"""
+        self.execute(sql, (tag.tag_id,))
 
     def popular_tags(self, count):
         # Tähän komento joka hakee 'count' verran suosituimpia aihetunnisteita

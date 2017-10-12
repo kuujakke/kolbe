@@ -1,25 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
     {{ super() }}
+    {{ pagedown.include_pagedown() }}
     <div class="container-fluid">
         <div class="panel panel-default col-lg-12">
             <div class="panel-heading">
                 <h3 class="panel-title">Tags</h3>
             </div>
-            <table width="100%" class="table table-bordered table-striped table-hover table-responsive">
-                <thead>
+            <div class="panel-body">
+                <table width="100%" class="table table-bordered table-striped table-hover table-responsive">
+                    <thead>
                     <tr>
                         <th>Tag ID</th>
                         <th>Content</th>
+                        <th>Actions</th>
                     </tr>
-                </thead>
-                {% for tag in tags %}
-                    <tr>
-                        <td>{{ tag.tag_id }}</td>
-                        <td>{{ tag.content }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
+                    </thead>
+                    {% for tag in tags %}
+                        <tr>
+                            <td>{{ tag.tag_id }}</td>
+                            <td>{{ tag.content }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <form action="/tags/{{ tag.tag_id }}/delete" method="POST">
+                                        {{ form.csrf_token }}
+                                        <a href="/tags/{{ tag.tag_id }}/edit" class="btn btn-warning col-md-4">Edit</a>
+                                        <input type="submit" value="Delete" class="btn btn-danger col-md-4"/>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="panel-footer col-lg-12">
+                <a href="new" class="btn btn-success col-lg-4 col-lg-offset-4">New tag</a>
+            </div>
         </div>
     </div>
 {% endblock %}
